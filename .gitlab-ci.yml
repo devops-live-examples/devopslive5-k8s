@@ -14,7 +14,7 @@ deploy dev:
         name: dev
         url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRES_BASE_DOMAIN
 
-deploy dev:
+deploy prod:
     stage: deploy prod
     script:
         - helm repo add ondrejsika https://helm.oxs.cz
