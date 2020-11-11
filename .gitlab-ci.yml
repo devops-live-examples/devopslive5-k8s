@@ -1,0 +1,25 @@
+image: ondrejsika/ci
+
+stages:
+    - deploy dev
+    - deploy prod
+
+deploy dev:
+    stage: deploy dev
+    script:
+        - helm repo add ondrejsika https://helm.oxs.cz
+        - helm upgrade --install dev ondrejsika/one-image
+            --set HOST=$CI_PROJECT_PATH_SLUG.$KUBE_INGRES_BASE_DOMAIN
+    environment:
+        name: dev
+        url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRES_BASE_DOMAIN
+
+deploy dev:
+    stage: deploy prod
+    script:
+        - helm repo add ondrejsika https://helm.oxs.cz
+        - helm upgrade --install dev ondrejsika/one-image
+            --set HOST=$CI_PROJECT_PATH_SLUG.$KUBE_INGRES_BASE_DOMAIN
+    environment:
+        name: prod
+        url: https://$CI_PROJECT_PATH_SLUG.$KUBE_INGRES_BASE_DOMAIN
